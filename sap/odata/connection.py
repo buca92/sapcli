@@ -49,8 +49,8 @@ class Connection:
 
         # csrf token handling for all future "create" requests
         try:
-            get_logger().info('Executing head request as part of CSRF authentication %s', self._base_url)
-            req = requests.Request('HEAD', self._base_url, headers={'x-csrf-token': 'fetch'})
+            get_logger().info('Executing head request as part of CSRF authentication %s', self._base_url + self._query_args)
+            req = requests.Request('HEAD', self._base_url + self._query_args, headers={'x-csrf-token': 'fetch'})
             req = self._session.prepare_request(req)
             res = self._session.send(req, timeout=self._timeout)
 
